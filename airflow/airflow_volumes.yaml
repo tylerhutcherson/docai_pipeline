@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dag-volume
+spec:
+  capacity:
+    storage: 1Gi
+  storageClassName: standard
+  persistentVolumeReclaimPolicy: Delete  
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /dags
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dag-claim
+spec:
+  volumeName: dag-volume
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: log-volume
+spec:
+  capacity:
+    storage: 4Gi
+  storageClassName: standard
+  persistentVolumeReclaimPolicy: Delete  
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /logs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: log-claim
+spec: 
+  volumeName: log-volume
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: invoice-volume
+spec:
+  capacity:
+    storage: 4Gi
+  storageClassName: standard
+  persistentVolumeReclaimPolicy: Delete  
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /invoices
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: invoice-claim
+spec: 
+  volumeName: invoice-volume
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi
+

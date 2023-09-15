@@ -1,0 +1,53 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        system-reserved: memory=2Gi
+        node-labels: "ingress-ready=true"       
+- role: worker
+  kubeadmConfigPatches:
+  - |
+    kind: JoinConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        system-reserved: memory=8Gi
+  extraMounts:
+    - hostPath: ./dags
+      containerPath: /dags
+    - hostPath: ./invoices
+      containerPath: /invoices
+    - hostPath: ./logs
+      containerPath: /logs  
+- role: worker
+  kubeadmConfigPatches:
+  - |
+    kind: JoinConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        system-reserved: memory=8Gi
+  extraMounts:
+    - hostPath: ./dags
+      containerPath: /dags
+    - hostPath: ./invoices
+      containerPath: /invoices
+    - hostPath: ./logs
+      containerPath: /logs  
+- role: worker
+  kubeadmConfigPatches:
+  - |
+    kind: JoinConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        system-reserved: memory=8Gi
+  extraMounts:
+    - hostPath: ./dags
+      containerPath: /dags
+    - hostPath: ./invoices
+      containerPath: /invoices
+    - hostPath: ./logs
+      containerPath: /logs  
