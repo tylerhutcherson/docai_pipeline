@@ -38,9 +38,11 @@ This is a demonstration of duplication detection of invoice documents.  This lev
 git clone https://github.com/Redislabs-Solution-Architects/docai_pipeline.git && cd docai_pipeline
 ```
 - Note 1:  This is scripted to be fully-automatic; however, the first usage of Azure's Document Intelligence API(s) requires a manual step of building a resource/deployment and then accepting their AI-usage terms.
-- Note 2:  Apache Airflow will be writing to the local 'invoices' directory.  Airflow operates with a uid of 50000 and gid of 0 (root).  You will need to change the group of the 'invoices' directory such that Airflow has write access to it.
+- Note 2:  Apache Airflow will be writing to the local 'invoices' directory.  Airflow operates with a uid of 50000 and gid of 0 (root).  You will need to change the group of the dags, invoices, and logs directories such that Airflow has access to them.
 ```bash
+sudo chgrp -R root dags
 sudo chgrp -R root invoices
+sudo chgrp -R root logs
 ```
 
 ## Usage <a name="usage"></a>
