@@ -27,16 +27,16 @@ def stringify(invoice: AnalyzedDocument, vector_fields: [str]) -> str:
                     amount = item.value.get('Amount')
                     if amount:
                         value += f'Amount {amount.value} '
-            else:        
+            else:
                 value = str(field.value)
             value = value.replace('\n', ' ')
             value = value.replace('  ', ' ')
             invoice_string += f'{field_name} {value} '
         if field_name == 'CustomerName':
             if value:
-                customer_name = value  
+                customer_name = value
             else:
-                customer_name = 'unknown'      
+                customer_name = 'unknown'
     return {'customer_name': customer_name, 'ocr': invoice_string}
 
 @retry(wait=wait_random_exponential(min=10, max=60), stop=stop_after_attempt(3))
@@ -47,7 +47,7 @@ def ocr(filepath: str) -> dict:
     formrec_var = Variable.get("formrec", deserialize_json=True, default_var=None)
     if (type(formrec_var) != 'dict'):  # hack for an apparent bug in airflow
         formrec_var = json.loads(formrec_var)
-    
+
     key = formrec_var["key"]
     endpoint = formrec_var["endpoint"]
     vector_fields = formrec_var["fields"]

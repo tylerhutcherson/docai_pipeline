@@ -19,12 +19,12 @@ This is a demonstration of duplication detection of invoice documents.  This lev
 - De-duplication via Redis Vector Similarity Search (VSS)
 
 ## Features <a name="features"></a>
-- Kubernetes architecture (local - Kind) 
+- Kubernetes architecture (local - Kind)
 - Redis Enterprise: 3 node cluster
 - Apache Airflow-managed workflow (Dag)
 - Azure Document Intelligence form parsing (Form Recognizer)
 - Azure OpenAI embedding
-- Redis vector/metadata storage + search (VSS)
+- Redis vector/metadata storage + search (VSS) with [RedisVL](https://redisvl.com)
 
 ## Prerequisites <a name="prerequisites"></a>
 - kind
